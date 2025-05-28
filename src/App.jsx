@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import useAuth from './hooks/useAuth';
 import HomePage from './HomePage';
 import WatchPage from './WatchPage';
+import LogoutPage from '../LogoutPage';
 import LoadingComponent from './components/Loading';
 
 const AppRoutes = () => {
@@ -16,6 +17,7 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route path="/watch" element={<WatchPage/>} />
+        <Route path="/logout" element={<LogoutPage/>} />
       </Routes>
     </Router>
   );
