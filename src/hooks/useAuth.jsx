@@ -4,8 +4,8 @@ import Keycloak from "keycloak-js";
 
 const useAuth = () => {
   const isRun = useRef(false);
-  const {keycloakClient, setKeycloakClient} = useKeycloakStore();
-  const {userInfo, setUserInfo} = useUserInfoStore();
+  const {setKeycloakClient} = useKeycloakStore();
+  const {setUserInfo} = useUserInfoStore();
   const [isLogin, setLogin] = useState(false);
 
   useEffect(() => {

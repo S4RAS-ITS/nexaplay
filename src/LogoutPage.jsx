@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { useUserInfoStore, useKeycloakStore } from './src/store/useStore';
+import { useUserInfoStore, useKeycloakStore } from './store/useStore';
 
 const LogoutPage = () => {
-  const {keycloakClient, setKeycloakClient} = useKeycloakStore();
-  const {userInfo, setUserInfo} = useUserInfoStore();
+  const {keycloakClient} = useKeycloakStore();
+  const {setUserInfo} = useUserInfoStore();
 
   function doLogout() {
     setUserInfo(null);
@@ -12,7 +12,7 @@ const LogoutPage = () => {
 
   useEffect(() => {
     doLogout();
-  }, [keycloakClient]);
+  });
 
   return (
     <div className='w-full h-screen flex flex-col justify-center items-center gap-8'>

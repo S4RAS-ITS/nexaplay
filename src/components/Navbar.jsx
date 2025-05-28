@@ -1,4 +1,4 @@
-import { useUserInfoStore, useKeycloakStore } from '../store/useStore'
+import { useUserInfoStore } from '../store/useStore'
 import { useNavigate } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import { IoLogOut } from "react-icons/io5";
@@ -8,8 +8,7 @@ const NavbarComponent = () => {
   const [showLogout, setShowLogout] = useState(false);
   const logoutRef = useRef(null);
 
-  const {keycloakClient, setKeycloakClient} = useKeycloakStore();
-  const {userInfo, setUserInfo} = useUserInfoStore();
+  const { userInfo } = useUserInfoStore();
 
   const handleClickOutside = event => {
     if (logoutRef.current && !logoutRef.current.contains(event.target)) {

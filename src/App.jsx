@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import useAuth from './hooks/useAuth';
 import HomePage from './HomePage';
 import WatchPage from './WatchPage';
-import LogoutPage from '../LogoutPage';
+import LogoutPage from './LogoutPage';
 import LoadingComponent from './components/Loading';
 
 const AppRoutes = () => {
