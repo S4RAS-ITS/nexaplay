@@ -63,8 +63,8 @@ function HomePage() {
     <div className='homePage min-h-screen bg-gray-950'>
       <NavbarComponent />
 
-      <div className='flex flex-row justify-between pt-24 pl-8 pr-12'>
-        <div className='sidebar fixed flex flex-col bg-gray-900/80 w-[350px] h-[85vh] pb-8 rounded-xl'>
+      <div className='flex flex-row justify-between pt-24 pl-0 pr-10'>
+        <div className='sidebar fixed flex flex-col bg-gray-900/80 w-[320px] h-[85vh] pb-8 rounded-br-xl rounded-tr-xl'>
           <div className='flex py-8 w-full justify-center'>
             <h1 className='text-3xl text-white font-black'>Streaming</h1>
           </div>
@@ -80,19 +80,19 @@ function HomePage() {
                     channels.length == 0
                     ?
                       <div className='px-3 py-5 flex flex-row gap-2 justify-between items-center'>
-                        <h4 className='text-white/50 font-semibold text-base italic w-auto'>No Channels Found</h4>
+                        <h4 className='text-white/50 font-semibold text-sm italic w-auto'>No Channels Found</h4>
                       </div>
                     :
                       channels.map((channel) => {
                         return (
                           <div key={channel.uuid} className='px-3 py-4 flex flex-row gap-2 justify-between items-center hover:bg-gray-700/50 hover:cursor-pointer rounded-2xl' onClick={() => handleChannelStreamClick(channel.uuid)}>
-                            <h4 className='text-white font-semibold text-xl w-auto'>{ channel.name }</h4>
+                            <h4 className='text-white font-semibold text-base w-auto'>{ channel.name }</h4>
                             {
                               channel.enabled
                               ? 
-                                <p className='text-green-600 font-extrabold text-base w-fit'>Active</p>
+                                <p className='text-green-600 font-extrabold text-sm w-fit'>Active</p>
                               : 
-                                <p className='text-red-600 font-extrabold text-base w-fit'>Offline</p>
+                                <p className='text-red-600 font-extrabold text-sm w-fit'>Offline</p>
                             }
                           </div>
                         )
@@ -103,7 +103,7 @@ function HomePage() {
           </div>
         </div>
 
-        <div className='vod ml-[380px] w-full'>
+        <div className='vod ml-[350px] w-full'>
           <div className=' pb-5 w-full justify-start'>
             <h1 className='text-3xl text-white font-black'>Video On Demand</h1>
           </div>
