@@ -62,13 +62,13 @@ const WatchPage = () => {
       fetchChannels(uuidFromQuery);
       setChannelUuid(uuidFromQuery);
       
-      if(uuidFromQuery === BIG_BUCK_BUNNY_UUID) {
-        setCurrentChannelType('mp4');
-        setCurrentStreamUrl(BIG_BUCK_BUNNY_MP4_URL);
-      } else if(uuidFromQuery !== '') {
+      if(uuidFromQuery === '1') {
+        setCurrentChannelType('hls');
+        setCurrentStreamUrl('https://d2e1asnsl7br7b.cloudfront.net/7782e205e72f43aeb4a48ec97f66ebbe/index.m3u8');
+      } else if(uuidFromQuery !== '' && uuidFromQuery !== '1') {
         setCurrentChannelType('hls');
 
-        const streamUrl = `https://${tvheadendIp}/stream/channel/${uuidFromQuery}?profile=hls-ts-avlib`;
+        const streamUrl = `https://${username}:${password}@${tvheadendIp}/stream/channel/${uuidFromQuery}?profile=pass`;
         setCurrentStreamUrl(streamUrl);
       }
     }
@@ -91,6 +91,7 @@ const WatchPage = () => {
           manifestLoadingTimeOut: 30000,
           xhrSetup: function (xhr, url) {
             if (url.startsWith(`https://${tvheadendIp}`)) {
+              xhr.withCredentials = true;
               xhr.setRequestHeader('Authorization', 'Basic ' + btoa(username + ":" + password))
             }
           }
@@ -98,10 +99,13 @@ const WatchPage = () => {
         hlsRef.current = hls
         hls.loadSource(currentStreamUrl)
         hls.attachMedia(videoRef.current)
+        hls.on(Hls.Events.FRAG_LOADING, (_, data) => {
+          console.log('Loading segment:', data.frag.url);
+        })
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
           videoRef.current.play().catch(e => console.error("Error playing HLS (manifest parsed):", e))
         })
-        hls.on(Hls.Events.ERROR, function (event, data) {
+        hls.on(Hls.Events.ERROR, function (_, data) {
           if (data.fatal) {
             let errorDetails = "HLS fatal error"
             if (data.details) errorDetails += `: ${data.details}`
@@ -149,7 +153,7 @@ const WatchPage = () => {
           {
             currentStreamUrl
             ?
-              <video ref={videoRef} controls className='w-full h-[75vh] object-contain'></video>
+              <video ref={videoRef} controls autoPlay className='w-full h-[75vh] object-contain'></video>
             :
               <></>
           }
